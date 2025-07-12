@@ -1,0 +1,25 @@
+provider "aws" {
+    region            = "$(var.aws_regions)"
+}
+
+data "aws_caller_identity" "current" {}
+
+terraform {
+  backend "s3" {
+    bucket            = "tf-cs-prod-st-dnb"
+    region            = "eu-west-1"
+    encrypt           = true
+    acl               = "bucket-owner-full-control"
+  }
+}
+
+data "terraform_remote_state" "vpc" {
+  backend             = "s3"
+  config {
+    bucket            = "tf-cs-prod-st-dnb"
+    key               = "env/dnb-${lookup(var.tags, "Environment")}/${var.aws_region}/vpc.tfstate"
+    region            = "eu-west-1"
+    acl               = "bucket-owner-full-control"
+  }
+}
+
