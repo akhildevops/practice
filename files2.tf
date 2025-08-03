@@ -13,13 +13,4 @@ terraform {
   }
 }
 
-data "terraform_remote_state" "vpc" {
-  backend             = "s3"
-  config {
-    bucket            = "tf-cs-prod-st-dnb"
-    key               = "env/dnb-${lookup(var.tags, "Environment")}/${var.aws_region}/vpc.tfstate"
-    region            = "eu-west-1"
-    acl               = "bucket-owner-full-control"
-  }
-}
 
