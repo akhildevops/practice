@@ -1,0 +1,16 @@
+provider "aws" {
+    region            = "$(var.aws_regions)"
+}
+
+data "aws_caller_identity" "current" {}
+
+terraform {
+  backend "s3" {
+    bucket            = "tf-cs-prod-st-dnb"
+    region            = "eu-west-4"
+    encrypt           = true
+    acl               = "bucket-owner-full-control"
+  }
+}
+
+
