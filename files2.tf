@@ -12,5 +12,5 @@ terraform {
     acl               = "bucket-owner-full-control"
   }
 }
-
+data "aws_caller_identity" "current" {}
 
