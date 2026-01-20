@@ -7,10 +7,11 @@ data "aws_caller_identity" "current" {}
 terraform {
   backend "s3" {
     bucket            = "tf-cs-prod-st-dnb"
-    region            = "eu-west-4"
+    region            = "us-east-2"
     encrypt           = true
     acl               = "bucket-owner-full-control"
   }
 }
+data "aws_caller_identity" "current" {}
 
 
